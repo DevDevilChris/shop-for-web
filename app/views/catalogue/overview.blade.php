@@ -14,10 +14,9 @@
 
     <div class="col-lg-3">
         <div class="thumbnail">
-            <img class="img-rounded" src="holder.js/255x255">
+            {{ HTML::image("img/catalogue/product/camping_hat.jpg", "Camping Hat", array('class'=>'img-rounded')) }}
             <div class="caption text-center">
                 <h3>{{ HTML::link('/catalogue/'.$item->id, $item->name)  }}</h3>
-                <p class="lead">{{{ $item->descr  }}}</p>
                 <p> {{ Lang::get('catalogue.price_incl_vat', array('price' => number_format($item->price, 2, ',', '.'))) }}</p>
                 <p>
                     {{ HTML::link('/catalogue/add/'.$item->id.'/1', Lang::get('catalogue.add_to_cart'), array('class'=>'btn btn-success', 'role'=>'button'))  }}

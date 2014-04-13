@@ -15,7 +15,7 @@ return array(
 
     'add_to_cart'      => 'Add to cart',
     'details'         => 'Details',
-    'price_incl_vat'     => '&euro; :price',
+    'price_incl_vat'     => 'Prijs: <span class="text-success">&euro; :price</span>',
     'price_excl_vat'     => 'Exclusive VAT: &euro; :price',
     'added_to_cart' => 'Product `:product` successfully added to shopping cart',
 );
