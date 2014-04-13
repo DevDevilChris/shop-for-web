@@ -10,7 +10,12 @@ class Catalogue extends Eloquent {
 
     protected $table = 'product';
 
-    public static function getAllProducts($sorting = null) {
+    /**
+     * Get all the products inclusive all the product details
+     * @param null $sorting
+     * @return mixed
+     */
+    public static function getAllProducts($sorting = null, $category = null) {
 
         $products = DB::table('product')
             ->join('product_detail', 'product.id', '=', 'product_detail.product_id')
@@ -32,12 +37,19 @@ class Catalogue extends Eloquent {
                 break;
         }
 
+        if($category)
+            $products->where('product.product_category_id', '=', $category);
+
         $products = $products->get();
 
         return $products;
-
     }
 
+    /**
+     * Get a single product with details
+     * @param $id
+     * @return mixed
+     */
     public static function getProduct($id) {
 
         $product = DB::table('product')
@@ -48,7 +60,14 @@ class Catalogue extends Eloquent {
         ;
 
         return $product[0];
-
     }
 
+    public static function getCategories() {
+
+        $categories = DB::table('product_category')
+            ->select('*')
+            ->get();
+
+        return $categories;
+    }
 }

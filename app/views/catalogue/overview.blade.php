@@ -12,7 +12,8 @@
 {{ Form::open(array('url'=>'catalogue')) }}
 <div class="row">
     <div class="col-lg-2">
-        {{ Form::select(
+        {{
+        Form::select(
             'sorting',
             array(
                 'null' => 'No sorting',
@@ -26,7 +27,20 @@
                 'class' => 'form-control',
                 'onchange' => 'submit()'
             )
+        )
+        }}
+    </div>
+    <div class="col-lg-2">
+        {{
+        Form::select(
+            'category',
+            $list,
+            Session::get('category'),
+            array(
+                'class' => 'form-control',
+                'onchange' => 'submit()'
             )
+        )
         }}
     </div>
 </div>

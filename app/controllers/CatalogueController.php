@@ -9,9 +9,16 @@ class CatalogueController extends \BaseController {
 	 */
 	public function index()
 	{
-        $products = Catalogue::getAllProducts(Session::get('sorting'));
+        $products = Catalogue::getAllProducts(Session::get('sorting'), Session::get('category'));
+        $categories = Catalogue::getCategories();
 
-		return View::make('catalogue.overview')->with('products', $products);
+        $list = array();
+        $list[0] = 'All';
+        foreach($categories as $cat) {
+            $list[$cat->id] = $cat->name;
+        }
+
+		return View::make('catalogue.overview')->with('products', $products)->with('list', $list);
 	}
 
 	/**
@@ -30,6 +37,7 @@ class CatalogueController extends \BaseController {
     public function store()
     {
         Session::set('sorting', Input::get('sorting'));
+        Session::set('category', Input::get('category'));
 
         return Redirect::to('catalogue')->withInput(Input::all());
     }

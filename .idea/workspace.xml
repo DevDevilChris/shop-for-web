@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/app/views/catalogue/overview.blade.php" line="42" mnemonic="2" />
+    <bookmark url="file://$PROJECT_DIR$/app/views/catalogue/overview.blade.php" line="56" mnemonic="2" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d42e537b-0e91-4464-b0b2-7c91b1dc157a" name="Default" comment="" />
@@ -29,25 +29,7 @@
       <file leaf-file-name="overview.blade.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/catalogue/overview.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="51" selection-start="667" selection-end="667" vertical-scroll-proportion="-3.0" vertical-offset="96" max-vertical-offset="1040">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="catalogue.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/lang/en/catalogue.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="83" selection-start="626" selection-end="626" vertical-scroll-proportion="-10.88" vertical-offset="0" max-vertical-offset="416">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="32" selection-start="851" selection-end="851" vertical-scroll-proportion="-6.84" vertical-offset="37" max-vertical-offset="512">
+            <state line="36" column="17" selection-start="978" selection-end="978" vertical-scroll-proportion="0.2" vertical-offset="592" max-vertical-offset="1264">
               <folding />
             </state>
           </provider>
@@ -65,7 +47,7 @@
       <file leaf-file-name="CatalogueController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/CatalogueController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="5" selection-start="161" selection-end="161" vertical-scroll-proportion="-4.48" vertical-offset="48" max-vertical-offset="816">
+            <state line="39" column="57" selection-start="946" selection-end="946" vertical-scroll-proportion="-6.84" vertical-offset="453" max-vertical-offset="944">
               <folding />
             </state>
           </provider>
@@ -74,7 +56,7 @@
       <file leaf-file-name="Catalogue.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/Catalogue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="56" selection-start="610" selection-end="610" vertical-scroll-proportion="0.57377046" vertical-offset="24" max-vertical-offset="864">
+            <state line="40" column="46" selection-start="1104" selection-end="1104" vertical-scroll-proportion="0.6885246" vertical-offset="224" max-vertical-offset="1168">
               <folding />
             </state>
           </provider>
@@ -117,8 +99,8 @@
         <option value="$PROJECT_DIR$/app/views/layout/master.blade.php" />
         <option value="$PROJECT_DIR$/app/lang/en/catalogue.php" />
         <option value="$PROJECT_DIR$/app/views/catalogue/single.blade.php" />
-        <option value="$PROJECT_DIR$/app/controllers/CatalogueController.php" />
         <option value="$PROJECT_DIR$/app/views/catalogue/overview.blade.php" />
+        <option value="$PROJECT_DIR$/app/controllers/CatalogueController.php" />
         <option value="$PROJECT_DIR$/app/models/Catalogue.php" />
       </list>
     </option>
@@ -747,23 +729,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="32" selection-start="851" selection-end="851" vertical-scroll-proportion="-6.84" vertical-offset="37" max-vertical-offset="512">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/catalogue/overview.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="51" selection-start="667" selection-end="667" vertical-scroll-proportion="-3.0" vertical-offset="96" max-vertical-offset="1040">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/lang/en/catalogue.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="83" selection-start="626" selection-end="626" vertical-scroll-proportion="-10.88" vertical-offset="0" max-vertical-offset="416">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="32" selection-start="851" selection-end="851" vertical-scroll-proportion="0.36" vertical-offset="37" max-vertical-offset="512">
           <folding />
         </state>
       </provider>
@@ -775,16 +750,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/catalogue/overview.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="17" selection-start="978" selection-end="978" vertical-scroll-proportion="0.2" vertical-offset="592" max-vertical-offset="1264">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/CatalogueController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="5" selection-start="161" selection-end="161" vertical-scroll-proportion="-4.48" vertical-offset="48" max-vertical-offset="816">
+        <state line="39" column="57" selection-start="946" selection-end="946" vertical-scroll-proportion="-6.84" vertical-offset="453" max-vertical-offset="944">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/Catalogue.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="56" selection-start="610" selection-end="610" vertical-scroll-proportion="0.57377046" vertical-offset="24" max-vertical-offset="864">
+        <state line="40" column="46" selection-start="1104" selection-end="1104" vertical-scroll-proportion="0.6885246" vertical-offset="224" max-vertical-offset="1168">
           <folding />
         </state>
       </provider>
