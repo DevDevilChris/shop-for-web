@@ -9,7 +9,7 @@ class CatalogueController extends \BaseController {
 	 */
 	public function index()
 	{
-        $products = Catalogue::getAllProducts();
+        $products = Catalogue::getAllProducts(Session::get('sorting'));
 
 		return View::make('catalogue.overview')->with('products', $products);
 	}
@@ -26,6 +26,13 @@ class CatalogueController extends \BaseController {
 
         return View::make('catalogue.single')->with('product', $product);
 	}
+
+    public function store()
+    {
+        Session::set('sorting', Input::get('sorting'));
+
+        return Redirect::to('catalogue')->withInput(Input::all());
+    }
 
     public function add_to_cart($id, $qty) {
         $product = Catalogue::getProduct($id);

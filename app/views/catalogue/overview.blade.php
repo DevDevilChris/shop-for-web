@@ -9,6 +9,29 @@
 </div>
 @endif
 
+{{ Form::open(array('url'=>'catalogue')) }}
+<div class="row">
+    <div class="col-lg-2">
+        {{ Form::select(
+            'sorting',
+            array(
+                'null' => 'No sorting',
+                'alpha-up' => 'Alphabetic A - Z',
+                'alpha-down' => 'Alphabetic Z - A',
+                'price-up' => 'Price ascending',
+                'price-down' => 'Price descending',
+            ),
+            Session::get('sorting'),
+            array(
+                'class' => 'form-control',
+                'onchange' => 'submit()'
+            )
+            )
+        }}
+    </div>
+</div>
+{{ Form::close() }}
+<div class="clr20"></div>
 <div class="row">
 @foreach($products as $i => $item)
 

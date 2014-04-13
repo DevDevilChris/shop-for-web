@@ -10,13 +10,29 @@ class Catalogue extends Eloquent {
 
     protected $table = 'product';
 
-    public static function getAllProducts() {
+    public static function getAllProducts($sorting = null) {
 
         $products = DB::table('product')
             ->join('product_detail', 'product.id', '=', 'product_detail.product_id')
             ->select('*')
-            ->get()
         ;
+
+        switch($sorting) {
+            case 'alpha-up' :
+                $products->orderBy('product.name', 'asc');
+                break;
+            case 'alpha-down' :
+                $products->orderBy('product.name', 'desc');
+                break;
+            case 'price-up' :
+                $products->orderBy('product_detail.price', 'asc');
+                break;
+            case 'price-down' :
+                $products->orderBy('product_detail.price', 'desc');
+                break;
+        }
+
+        $products = $products->get();
 
         return $products;
 
