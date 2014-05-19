@@ -20,10 +20,10 @@ class CheckoutController extends \BaseController {
             $vat = ($cartItem->subtotal / 100) * 21;
 
             $total_vat += $vat;
-            $total_price_products += ($cartItem->subtotal + $vat);
+            $total_price_products += $cartItem->subtotal;
         }
 
-		return View::make('checkout.onestepcheckout')
+		return View::make('checkout.onestepcheckout.index')
                     ->with('total_vat', $total_vat)
                     ->with('total_price_products', $total_price_products);
 	}
@@ -94,9 +94,27 @@ class CheckoutController extends \BaseController {
     public function update_qty($product_key, $qty) {
         Cart::update($product_key, $qty);
 
+        $update = array();
+        foreach(Cart::get($product_key) as $i => $item) {
+            if($i == "options") {
+                foreach($item as $o => $option) {
+                    $update[$i][$o] = $option;
+                }
+            } else {
+                $update[$i] = $item;
+            }
+        }
+
+        $update['total'] = 0;
+        foreach(Cart::content() as $item) {
+            $update['total'] += $item['subtotal'];
+        }
+
         $response = array(
             'status' => 'success',
             'msg' => 'Product qty successfully updated',
+            'row_id' => $product_key,
+            'cart' => json_encode($update),
         );
 
         return Response::json( $response );
@@ -109,9 +127,17 @@ class CheckoutController extends \BaseController {
     public function remove_product($product_key) {
         Cart::remove($product_key);
 
+        $update = array();
+        $update['total'] = 0;
+        foreach(Cart::content() as $item) {
+            $update['total'] += $item['subtotal'];
+        }
+
         $response = array(
             'status' => 'success',
             'msg' => 'Product successfully removed',
+            'row_id' => $product_key,
+            'cart' => json_encode($update),
         );
 
         return Response::json( $response );

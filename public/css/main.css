@@ -14,3 +14,39 @@
     border-radius: 0 0 4px 4px;
 }
 
+.add_to_cart_modal {
+    padding: 30px;
+}
+.add_to_cart_modal .modal-title {
+    padding-top: 0;
+}
+
+.cart {
+    height: 40px;
+    width: 40px;
+    background: transparent url(../img/cart/cart.png) no-repeat center center;
+    margin-top: 5px;
+}
+
+.cart.mo {
+    background: transparent url(../img/cart/cart_mo.png) no-repeat center center !important;
+}
+
+.cart .count {
+    color: #FFF;
+    margin-right: 5px;
+    width: 20px;
+    float: right;
+}
+
+.cart .cart-summary {
+    width: 360px;
+    min-height: 1px;
+    position: absolute;
+    background: #FFF;
+    margin-top: 40px;
+    margin-left: -310px;
+    display: none;
+    z-index: 999;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.3);
+}

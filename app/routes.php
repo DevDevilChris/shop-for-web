@@ -20,7 +20,8 @@ Route::get('checkout/remove/{product_key}', 'CheckoutController@remove_product')
 
 // Catalogue routes
 Route::resource('catalogue', 'CatalogueController');
-Route::get('catalogue/add/{id}/{qty}', 'CatalogueController@add_to_cart'); //route to add product to cart
+Route::get('catalogue/add/{id}/{qty}/{return}', 'CatalogueController@add_to_cart'); //route to add product to cart
+Route::get('cart', 'CatalogueController@get_cart'); //get cart contents
 
 // Confide routes
 Route::get( 'user/create',                 'UserController@create');

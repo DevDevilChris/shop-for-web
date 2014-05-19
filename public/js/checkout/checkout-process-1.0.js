@@ -8,19 +8,18 @@ function CheckoutProcess() {
 CheckoutProcess.prototype.syncShippingTable = function() {
     var checked = $('#same_as_bt').is(':checked');
 
-    if(checked) {
-        $('input[name=st_firstname]').val( $('input[name=bt_firstname]').val() );
-        $('input[name=st_insertion]').val( $('input[name=bt_insertion]').val() );
-        $('input[name=st_lastname]').val( $('input[name=bt_lastname]').val() );
-        $('input[name=st_address_1]').val( $('input[name=bt_address_1]').val() );
-        $('input[name=st_address_2]').val( $('input[name=bt_address_2]').val() );
-        $('input[name=st_zip]').val( $('input[name=bt_zip]').val() );
-        $('input[name=st_city]').val( $('input[name=bt_city]').val() );
+    $('[name*=bt_]').each(function(i, v){
+        var fieldName = v.name.replace('bt_', 'st_');
+        if($('[name='+fieldName+']').length > 0) {
+            if(v.nodeName == 'SELECT') {
+                console.log('select field');
+            } else {
+                $('[name='+fieldName+']').val(v.value);
+            }
+        }
+    });
 
-        $('div.sameasbt').css('display', 'none');
-    } else {
-        $('div.sameasbt').css('display', 'block');
-    }
+    $('div.sameasbt').css('display', (checked) ? 'none' : 'block');
 };
 
 CheckoutProcess.prototype.termsAccepted = function() {
@@ -30,19 +29,47 @@ CheckoutProcess.prototype.termsAccepted = function() {
 };
 
 CheckoutProcess.prototype.updateQty = function(product_key, qty) {
+    var self = this;
     $.getJSON("checkout/update/"+product_key+"/"+qty, function(data) {
-        console.log(data);
+        var obj = $.parseJSON(data.cart);
+        self.reloadTable( obj );
+        CartNX.update();
     });
-
-    //TODO reset price table
 };
 
 CheckoutProcess.prototype.removeProduct = function(product_key) {
+    var self = this;
     $.getJSON("checkout/remove/"+product_key, function(data) {
-        console.log(data);
+        var obj = $.parseJSON(data.cart);
+        self.removeRow(obj, data);
+        CartNX.update();
+    });
+};
+
+CheckoutProcess.prototype.reloadTable = function(data) {
+    var self = this;
+
+    $('tr[cart-item-id='+data.rowid+'] span.product_sub_price').fadeOut(200).fadeIn(200).html(number_format(data.subtotal, 2, ',', '.'));
+
+    self.setTotalValues(data);
+};
+
+CheckoutProcess.prototype.removeRow = function(cart, data) {
+    var self = this;
+    var tr = $('tr[cart-item-id='+data.row_id+']');
+
+    tr.fadeOut(400, function(){
+        tr.remove();
     });
 
-    //TODO reset price table
+    self.setTotalValues(cart);
+};
+
+CheckoutProcess.prototype.setTotalValues = function(data) {
+    $('span.product_total_sub').html(number_format(data.total, 2, ',', '.'));
+    var vat = (data.total * 1.21 ) - data.total;
+    $('span.product_total_vat').html(number_format(vat, 2, ',', '.'));
+    $('span.product_total').html(number_format(data.total + vat, 2, ',', '.'));
 };
 
 var CheckoutNX = new CheckoutProcess();

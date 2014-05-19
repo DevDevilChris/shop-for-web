@@ -15,9 +15,9 @@ class Catalogue extends Eloquent {
      * @param null $sorting
      * @return mixed
      */
-    public static function getAllProducts($sorting = null, $category = null) {
+    public function getAllProducts($sorting = null, $category = null) {
 
-        $products = DB::table('product')
+        $products = DB::table($this->table)
             ->join('product_detail', 'product.id', '=', 'product_detail.product_id')
             ->select('*')
         ;
@@ -50,9 +50,9 @@ class Catalogue extends Eloquent {
      * @param $id
      * @return mixed
      */
-    public static function getProduct($id) {
+    public function getProduct($id) {
 
-        $product = DB::table('product')
+        $product = DB::table($this->table)
             ->where('product.id', '=', $id)
             ->join('product_detail', 'product.id', '=', 'product_detail.product_id')
             ->select('*')
@@ -62,7 +62,7 @@ class Catalogue extends Eloquent {
         return $product[0];
     }
 
-    public static function getCategories() {
+    public function getCategories() {
 
         $categories = DB::table('product_category')
             ->select('*')

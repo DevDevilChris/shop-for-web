@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'webshop-sandbox',
 			'username'  => 'root',
-			'password'  => 'vetcool08',
+			'password'  => 'eULc8Qv1',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

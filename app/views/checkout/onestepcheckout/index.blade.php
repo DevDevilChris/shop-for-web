@@ -48,7 +48,6 @@
                 {{ Form::close() }}
 
                 @else
-
                 <p>
                     {{ Lang::get('checkout.welcome_message', array('name'=>Auth::user()->username)) }}
                 </p>
@@ -81,18 +80,17 @@
                     <thead>
                         <tr>
                             <th width="30%">{{ Lang::get('checkout.table_head_product') }}</th>
+                            <th width="30%">{{ Lang::get('checkout.table_head_amount') }}</th>
                             <th width="10%">{{ Lang::get('checkout.table_head_price') }}</th>
-                            <th width="15%">{{ Lang::get('checkout.table_head_amount') }}</th>
-                            <th width="15%">{{ Lang::get('checkout.table_head_vat') }}</th>
-                            <th width="15%">{{ Lang::get('checkout.table_head_discount') }}</th>
-                            <th width="15%">{{ Lang::get('checkout.table_head_total') }}</th>
+                            <th width="10%">{{ Lang::get('checkout.table_head_discount') }}</th>
+                            <th width="10%">{{ Lang::get('checkout.table_head_total') }}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- START OF PRODUCTS -->
                         @foreach(Cart::content() as $product)
 
-                        <tr>
+                        <tr cart-item-id="{{ $product['rowid'] }}">
                             <td>
                                 <div class="media">
                                     <img class="media-object img-rounded pull-left" src="holder.js/60x60">
@@ -102,7 +100,6 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>€ {{ number_format($product['price'], 2, ',', '.') }}</td>
                             <td>
                                 <div class="input-group">
                                     {{ Form::text($product['id'].'_product_qty', $product['qty'], array('class' => 'form-control')) }}
@@ -117,63 +114,80 @@
                                     </span>
                                 </div>
                             </td>
-                            <td>&euro; {{ number_format($product['qty'] / 100 * 21 * $product['price'], 2, ',', '.') }}</td>
+                            <td>&euro; <span class="product_price">{{ number_format($product['price'], 2, ',', '.') }}</span></td>
+<!--                            <td style="color: #adadad;">&euro; <span class="product_vat">{{ number_format($product['qty'] / 100 * 21 * $product['price'], 2, ',', '.') }}</span></td>-->
                             <td></td>
-                            <td><strong>&euro; {{ number_format($product['qty'] * $product['price'], 2, ',', '.') }}</strong></td>
+                            <td><strong>&euro; <span class="product_sub_price">{{ number_format($product['qty'] * $product['price'], 2, ',', '.') }}</span></strong></td>
                         </tr>
 
                         @endforeach
 
-                        <tr>
-                            <td colspan="3">
-                                <span class="pull-right">{{ Lang::get('checkout.total_product_price') }}</span>
-                            </td>
-                            <td>&euro; {{ number_format($total_vat, 2, ',', '.') }}</td>
-                            <td></td>
-                            <td><strong>&euro; {{ number_format($total_price_products, 2, ',', '.') }} </strong></td>
-                        </tr>
                         <!-- END OF PRODUCTS -->
 
                         <!-- START OF SHIPPING -->
                         <tr>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <p>{{ Lang::get('checkout.shipping_method') }}</p>
-                                <select class="form-control">
-                                    <option value="1">Standard</option>
-                                    <option value="1">DHL service</option>
-                                    <option value="1">PostNL service</option>
-                                </select>
+                                <p>
+                                    <input type="radio" name="send_method" /> <label>Standard</label>
+                                    <small>Description</small>
+                                </p>
+                                <p>
+                                    <input type="radio" name="send_method" /> <label>DHL service</label>
+                                    <small>Description</small>
+                                </p>
+                                <p>
+                                    <input type="radio" name="send_method" /> <label>PostNL service</label>
+                                    <small>Description</small>
+                                </p>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <!-- END OF SHIPPING -->
 
                         <!-- START OF PAYMENT -->
                         <tr>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <p>{{ Lang::get('checkout.payment_method') }}</p>
-                                <select class="form-control">
-                                    <option value="1">Creditcard (VISA, Mastercard, etc)</option>
-                                    <option value="1">iDeal</option>
-                                    <option value="1">Paypal</option>
-                                </select>
+                                <p>
+                                    <input type="radio" name="payment_method" /> <label>Creditcard (VISA, Mastercard, etc)</label>
+                                    <small>Description</small>
+                                </p>
+                                <p>
+                                    <input type="radio" name="payment_method" /> <label>iDeal</label>
+                                    <small>Description</small>
+                                </p>
+                                <p>
+                                    <input type="radio" name="payment_method" /> <label>Paypal</label>
+                                    <small>Description</small>
+                                </p>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                         <!-- END OF PAYMENT -->
 
                         <!-- TOTAL -->
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
+                                <span class="pull-right">{{ Lang::get('checkout.total_product_price') }}</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>&euro; <span class="product_total_sub">{{ number_format($total_price_products, 2, ',', '.') }}</span> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <span class="pull-right">{{ Lang::get('checkout.total_product_vat') }}</span>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>&euro; <span class="product_total_vat">{{ number_format($total_vat, 2, ',', '.') }}</span> </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
                                 <span class="pull-right">{{ Lang::get('checkout.total') }}</span>
                             </td>
-                            <td>&euro; {{ number_format($total_vat, 2, ',', '.') }}</td>
                             <td></td>
-                            <td><strong class="text-success">&euro; {{ number_format($total_price_products, 2, ',', '.') }}</strong></td>
+                            <td></td>
+                            <td><strong class="text-success">&euro; <span class="product_total">{{ number_format(($total_price_products + $total_vat), 2, ',', '.') }}</span></strong></td>
                         </tr>
                     </tbody>
                 </table>
