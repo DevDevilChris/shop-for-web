@@ -47,6 +47,8 @@ class CatalogueController extends \BaseController {
     }
 
     public function add_to_cart($id, $qty, $return = 0) {
+        if(!Request::ajax()) { die('Invalid Request!'); }
+
         $model = new Catalogue;
 
         $product = $model->getProduct($id);
@@ -65,6 +67,8 @@ class CatalogueController extends \BaseController {
     }
 
     public function get_cart() {
+        if(!Request::ajax()) { die('Invalid Request!'); }
+
         $update = array();
         $total = 0;
 

@@ -13,6 +13,8 @@ class CheckoutController extends \BaseController {
         if(Cart::count() == 0)
             return 'No items found in the cart!';
 
+        var_dump(Cart::total());
+
         $total_vat = 0;
         $total_price_products = 0;
 
@@ -92,6 +94,8 @@ class CheckoutController extends \BaseController {
      * @return mixed json response
      */
     public function update_qty($product_key, $qty) {
+        if(!Request::ajax()) { die('Invalid Request!'); }
+
         Cart::update($product_key, $qty);
 
         $update = array();
@@ -125,6 +129,8 @@ class CheckoutController extends \BaseController {
      * @return mixed json response
      */
     public function remove_product($product_key) {
+        if(!Request::ajax()) { die('Invalid Request!'); }
+
         Cart::remove($product_key);
 
         $update = array();
