@@ -13,21 +13,8 @@ class CheckoutController extends \BaseController {
         if(Cart::count() == 0)
             return 'No items found in the cart!';
 
-        var_dump(Cart::total());
-
-        $total_vat = 0;
-        $total_price_products = 0;
-
-        foreach(Cart::content() as $cartItem) {
-            $vat = ($cartItem->subtotal / 100) * 21;
-
-            $total_vat += $vat;
-            $total_price_products += $cartItem->subtotal;
-        }
-
 		return View::make('checkout.onestepcheckout.index')
-                    ->with('total_vat', $total_vat)
-                    ->with('total_price_products', $total_price_products);
+                    ->with('total_price_products', Cart::total());
 	}
 
 	/**

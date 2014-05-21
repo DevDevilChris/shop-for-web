@@ -73,4 +73,3 @@ CheckoutProcess.prototype.setTotalValues = function(data) {
 };
 
 var CheckoutNX = new CheckoutProcess();
-

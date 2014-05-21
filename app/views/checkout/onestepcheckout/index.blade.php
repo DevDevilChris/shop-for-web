@@ -6,6 +6,8 @@
 
 @section('content')
 
+{{ var_dump(Cart::total()) }}
+
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-primary">
@@ -93,7 +95,7 @@
                         <tr cart-item-id="{{ $product['rowid'] }}">
                             <td>
                                 <div class="media">
-                                    <img class="media-object img-rounded pull-left" src="holder.js/60x60">
+                                    <img class="media-object img-rounded pull-left" data-src="holder.js/60x60">
                                     <div class="media-body">
                                         <h4 class="media-heading">{{ $product['name'] }}</h4>
                                         <small>sku-id: {{ $product['id'] }}</small>
@@ -115,7 +117,6 @@
                                 </div>
                             </td>
                             <td>&euro; <span class="product_price">{{ number_format($product['price'], 2, ',', '.') }}</span></td>
-<!--                            <td style="color: #adadad;">&euro; <span class="product_vat">{{ number_format($product['qty'] / 100 * 21 * $product['price'], 2, ',', '.') }}</span></td>-->
                             <td></td>
                             <td><strong>&euro; <span class="product_sub_price">{{ number_format($product['qty'] * $product['price'], 2, ',', '.') }}</span></strong></td>
                         </tr>
@@ -179,7 +180,7 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td>&euro; <span class="product_total_vat">{{ number_format($total_vat, 2, ',', '.') }}</span> </td>
+                            <td>&euro; <span class="product_total_vat">{{ number_format( ($total_price_products * 1.21) - $total_price_products , 2, ',', '.') }}</span> </td>
                         </tr>
                         <tr>
                             <td colspan="2">
@@ -187,7 +188,7 @@
                             </td>
                             <td></td>
                             <td></td>
-                            <td><strong class="text-success">&euro; <span class="product_total">{{ number_format(($total_price_products + $total_vat), 2, ',', '.') }}</span></strong></td>
+                            <td><strong class="text-success">&euro; <span class="product_total">{{ number_format(($total_price_products * 1.21), 2, ',', '.') }}</span></strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -300,7 +301,7 @@
                 </div>
                 <div class="panel-body">
                     <p>
-                        Shipping same as billing information <input type="checkbox" name="st_same_as_bt" id="same_as_bt" onchange="CheckoutNX.syncShippingTable()" />
+                        Shipping same as billing information <input type="checkbox" checked="checked" name="st_same_as_bt" id="same_as_bt" />
                     </p>
                     <div class="sameasbt">
                         <div class="form-group">
@@ -380,5 +381,19 @@
     </div>
 
 {{ Form::close() }}
+
+<script type="text/javascript">
+    $(function() {
+        function sameAsBT() {
+            var checked = $('input[name=st_same_as_bt]').is(':checked');
+            $('div.sameasbt').css('display', (checked) ? 'none' : 'block');
+        }
+
+        sameAsBT();
+        $('input[name=st_same_as_bt]').on('change', function(e) {
+            sameAsBT();
+        });
+    });
+</script>
 
 @stop
