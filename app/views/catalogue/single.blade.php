@@ -15,7 +15,7 @@
     <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
         <h2>{{ $product->name }}</h2>
         <p>
-            {{ $product->descr }}
+            {{ $product->description }}
         </p>
         <p class="lead">
             {{ Lang::get('catalogue.price_incl_vat', array('price'=>$product->price)) }}

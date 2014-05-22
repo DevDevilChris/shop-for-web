@@ -13,6 +13,7 @@ class Catalogue extends Eloquent {
     /**
      * Get all the products inclusive all the product details
      * @param null $sorting
+     * @param null $category
      * @return mixed
      */
     public function getAllProducts($sorting = null, $category = null) {
@@ -38,7 +39,7 @@ class Catalogue extends Eloquent {
         }
 
         if($category)
-            $products->where('product.product_category_id', '=', $category);
+            $products->where('product.category_id', '=', $category);
 
         $products = $products->get();
 
